@@ -38,34 +38,29 @@ CorelDRAW | 75
 
 [SECTION: EXPERIENCE]
 [JOB]
-[ROLE]: Senior Teacher — 3D Art & Animation
-[COMPANY]: Polyframe Academy of Arts and Cinematics
-[DURATION]: 2020 – Present
-[DESCRIPTION]: Teach 3D modelling, lighting, texturing, and animation workflows to students pursuing careers in design and animation. Mentor learners through portfolio-building projects, translating classroom technique into industry-ready work [1].
-[/JOB]
-[JOB]
 [ROLE]: Junior Editor & Animator (Internship)
 [COMPANY]: Exam Taiyaari
 [DURATION]: 2019 (3 months)
 [DESCRIPTION]: Supported video editing and motion graphics for educational content under senior creative direction. Assisted in animation production for online learning material [1].
 [/JOB]
 [JOB]
+[ROLE]: Senior Teacher — 3D Art & Animation
+[COMPANY]: Polyframe Academy of Arts and Cinematics
+[DURATION]: 2020 – Present
+[DESCRIPTION]: Teach 3D modelling, lighting, texturing, and animation workflows to students pursuing careers in design and animation. Mentor learners through portfolio-building projects, translating classroom technique into industry-ready work [1].
+[/JOB]
+[JOB]
 [ROLE]: Freelance Senior Designer & Editor
 [COMPANY]: Mado & Meta Marketing
-[DURATION]: 2019 – Present
+[DURATION]: 2020 – Present
 [DESCRIPTION]: Led visual design and video editing for client campaigns. Produced branded design assets and edited promotional video content. Developed marketing visuals and creative edits across campaigns [1].
 [/JOB]
 [END_SECTION]
 
 [SECTION: EDUCATION]
-[DEGREE]: BFA — Applied Arts, Second Year
+[DEGREE]: BFA — Applied Arts
 [INSTITUTION]: Chhatrapati Shahu Ji Maharaj University (CSJMU)
-[YEAR]: 2019
-[GRADE]: 74.5%
-[/DEGREE]
-[DEGREE]: BFA — Applied Arts, First Year
-[INSTITUTION]: Chhatrapati Shahu Ji Maharaj University (CSJMU)
-[YEAR]: 2018
+[YEAR]: 2022
 [GRADE]: 74.5%
 [/DEGREE]
 [DEGREE]: Class 12 — Commerce
