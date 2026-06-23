@@ -4,7 +4,7 @@
 [PRIMARY_COLOR]: #ff6b35
 [SECONDARY_COLOR]: #1b263b
 [THEME]: modern
-[AVATAR]: Asset/avatar.jpg
+[AVATAR]: Asset/profile.jpg
 
 [SECTION: ABOUT]
 Creative 3D Animator and Visual Designer with experience across 3D modelling, lighting, animation, and graphic design for advertising, film, and product branding. Skilled in leading design and editing for marketing campaigns, building visual content from concept to final render, and mentoring upcoming artists. Known for a strong eye for detail, reliable delivery on freelance and academic projects, and a versatile, multi-disciplinary skill set spanning 3D, photo, and video [1].
