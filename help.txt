@@ -1,0 +1,137 @@
+========================================================================
+             PORTFOLIO & CV SYSTEM — SETUP & HELP MANUAL
+========================================================================
+
+Welcome to your customizable portfolio website! You don't need any coding
+skills to maintain this site. Everything on your webpage can be updated 
+by editing "source.txt" in your root directory.
+
+------------------------------------------------------------------------
+1. CORE FORMAT RULES
+------------------------------------------------------------------------
+Inside "source.txt", we use simple bracket tags to configure settings and 
+define content sections.
+
+Single Line Tags:
+[KEY]: Value
+- Must begin on a new line.
+- The tag name must be exact, followed by a colon and space.
+
+Grouped Content Blocks:
+[SECTION: NAME]
+... entries ...
+[END_SECTION]
+- Used for repeating lists or structured items (e.g. Experiences, Skills).
+
+------------------------------------------------------------------------
+2. AVAILABLE PRESETS & CONFIGURATION
+------------------------------------------------------------------------
+Configure these global settings at the very top of your "source.txt":
+
+* [NAME]: Your full name.
+* [TITLE]: Your professional headline (e.g. 2D/3D Animator).
+* [TAGLINE]: A quick intro displayed on the landing page.
+* [PRIMARY_COLOR]: Custom hex code (e.g., #ff6b35) used for buttons, highlights, and icons.
+* [SECONDARY_COLOR]: Custom hex code (e.g., #1b263b) used for background headers.
+* [AVATAR]: File path to your profile picture (e.g., Asset/avatar.jpg).
+* [THEME]: Layout style configuration. Type one of the following:
+   - modern  : Sleek gradients, soft shadows, rounded elements. (Default)
+   - dark    : Low-eye-strain aesthetic with glowing highlights.
+   - minimal : Strict high-contrast layouts, structural borders, serif headings.
+
+------------------------------------------------------------------------
+3. UPDATING SECTIONS
+------------------------------------------------------------------------
+
+■ ABOUT SECTION:
+To write your bio, place your paragraphs between:
+[SECTION: ABOUT]
+Type whatever you want here...
+[END_SECTION]
+
+■ CONTACT SECTION:
+Define your social/communication methods:
+[SECTION: CONTACT]
+[EMAIL]: yourname@example.com
+[PHONE]: +01 2345 6789
+[ADDRESS]: Your City, Country
+[END_SECTION]
+
+■ SKILLS LIST:
+Input a list of skills on individual lines:
+[SECTION: SKILLS]
+3D Character Modeling
+Volumetric Lighting
+[END_SECTION]
+
+■ SOFTWARE PROFICIENCY BARS:
+Specify tool proficiencies using a pipe "|" symbol followed by a number (1 to 100):
+[SECTION: SOFTWARE]
+Adobe Photoshop | 95
+Autodesk Maya | 85
+[END_SECTION]
+
+■ EXPERIENCE TIMELINE:
+Add your work history using [JOB] and [/JOB] block boundaries:
+[SECTION: EXPERIENCE]
+[JOB]
+[ROLE]: Your Role Title
+[COMPANY]: Organization Name
+[DURATION]: 2024 – Present
+[DESCRIPTION]: Describe your responsibilities here.
+[/JOB]
+[END_SECTION]
+
+■ EDUCATION TIMELINE:
+Add degrees or schooling using [DEGREE] and [/DEGREE] block boundaries:
+[SECTION: EDUCATION]
+[DEGREE]: Name of Degree / Course
+[INSTITUTION]: School Name
+[YEAR]: Completion Year
+[GRADE]: Grade percentage or GPA (Optional)
+[/DEGREE]
+[END_SECTION]
+
+■ PORTFOLIO SECTION:
+Add items using [ITEM] and [/ITEM] boundaries. Supports images, local video clips,
+and YouTube embeds:
+[SECTION: PORTFOLIO]
+[ITEM]
+[TITLE]: Project Title
+[MEDIA]: Asset/my_render.jpg
+[DESCRIPTION]: Explain what makes this item special.
+[/ITEM]
+[END_SECTION]
+
+■ PARTNERSHIP LOGOS:
+Create an infinitely moving marquee carousel by adding file paths (one per line):
+[SECTION: LOGOS]
+Asset/partner1.svg
+Asset/partner2.svg
+[END_SECTION]
+
+------------------------------------------------------------------------
+4. HOW TO ADD IMAGES AND VIDEOS (The Asset/ Folder)
+------------------------------------------------------------------------
+To use local pictures or videos:
+1. Copy your media file (like your profile photo or video demo) into 
+   the "Asset" directory.
+2. In "source.txt", link to it like this: Asset/filename.ext
+3. Supported image types: .jpg, .png, .gif, .svg
+4. Supported video types: .mp4, .webm
+5. External links are also supported: You can paste web links directly, 
+   like a YouTube URL (e.g., https://www.youtube.com/watch?v=video_id) 
+   and the layout will embed it automatically!
+
+------------------------------------------------------------------------
+5. LOCAL PREVIEW VS. GITHUB PAGES HOSTING
+------------------------------------------------------------------------
+- Local Preview: If you double-click index.html locally, modern web browsers
+  might block loading "source.txt" due to built-in security rules (CORS).
+  If this happens, the page loads Snehil's fallback profile automatically.
+  To preview your custom edits offline, run a local development server 
+  (like VS Code's "Live Server" extension) or upload your files directly 
+  to GitHub Pages.
+- GitHub Pages: Once uploaded, the page fetches and parses your 
+  custom text file dynamically on every page load.
+========================================================================
