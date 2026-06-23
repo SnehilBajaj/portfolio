@@ -138,6 +138,38 @@
             width: 100%;
         }
 
+        /* Local File Helper Bar */
+        #local-mode-bar {
+            display: none;
+            background-color: #2b6cb0;
+            color: #ffffff;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .local-btn {
+            background-color: #ffffff;
+            color: #2b6cb0;
+            border: none;
+            padding: 6px 14px;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+        }
+        .local-btn:hover {
+            background-color: #f7fafc;
+        }
+
         /* Hero Section */
         #hero {
             padding: 100px 0 80px 0;
@@ -356,14 +388,6 @@
         .timeline-desc {
             color: var(--text-muted);
         }
-        .timeline-desc ul {
-            list-style: disc;
-            padding-left: 20px;
-            margin-top: 8px;
-        }
-        .timeline-desc li {
-            margin-bottom: 5px;
-        }
 
         /* Company Logos Infinite Carousel */
         .carousel-container {
@@ -495,7 +519,7 @@
             font-size: 1.05rem;
             font-weight: 500;
         }
-        /* Message form fallback simulation */
+        /* Message form */
         .contact-form .form-group {
             margin-bottom: 20px;
         }
@@ -511,7 +535,7 @@
             transition: var(--transition);
         }
         body.theme-dark .form-control {
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .form-control:focus {
             border-color: var(--primary-color);
@@ -533,7 +557,6 @@
             opacity: 0.8;
         }
 
-        /* Toast Notice for offline local storage context */
         #cors-banner {
             display: none;
             background-color: #f59e0b;
@@ -543,7 +566,7 @@
             font-size: 0.9rem;
             font-weight: 500;
             position: sticky;
-            top: 70px;
+            top: 0;
             z-index: 999;
         }
 
@@ -567,26 +590,29 @@
                 height: 250px;
             }
         }
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none; /* Simplification: mobile nav hidden or defaults to simple scroll */
-            }
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-        }
     </style>
 </head>
 <body class="theme-modern">
 
+    <!-- Sticky Local Mode Bypass Bar -->
+    <div id="local-mode-bar">
+        <div class="container" style="display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span><strong>Offline Preview Mode:</strong> Local files are blocked by browser CORS safety rules. To apply your edits, select your text file manually:</span>
+            <label for="local-file-input" class="local-btn">
+                <i class="fa-solid fa-file-import"></i> Load source.txt
+            </label>
+            <input type="file" id="local-file-input" accept=".txt" style="display: none;">
+        </div>
+    </div>
+
     <div id="cors-banner">
-        ⚠️ Notice: Running locally. The parser is displaying Snehil's default fallback profile. Run a local server or upload directly to GitHub Pages to load dynamic updates from 'source.txt'!
+        ⚠️ Notice: Dynamic content fetch failed. Rendering fallback defaults. Make sure "source.txt" is uploaded adjacent to index.html on your server.
     </div>
 
     <!-- Navigation Bar -->
     <header>
         <div class="container nav-container">
-            <div class="logo" id="header-logo-container">
+            <div class="logo">
                 <span id="nav-logo-name">Snehil Bajaj</span>
             </div>
             <nav>
@@ -609,7 +635,7 @@
                 <div class="hero-content">
                     <h1 id="hero-name">Snehil Bajaj</h1>
                     <h2 id="hero-title">2D/3D Animator & Visual Designer</h2>
-                    <p id="hero-tagline">Versatile professional specializing in 3D modeling, rendering, visual dynamics, and creative design aesthetics.</p>
+                    <p id="hero-tagline">Versatile professional specializing in 3D modeling, rendering, visual dynamics, and creative design aesthetics [1].</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">Work With Me</a>
                         <a href="#portfolio" class="btn btn-secondary">Explore Portfolio</a>
@@ -641,15 +667,11 @@
             <div class="skills-grid">
                 <div>
                     <h3 style="margin-bottom: 25px; font-size: 1.5rem;"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--primary-color); margin-right: 10px;"></i> Professional Skills</h3>
-                    <div class="skills-list" id="skills-container">
-                        <!-- Dynamic Skills Go Here -->
-                    </div>
+                    <div class="skills-list" id="skills-container"></div>
                 </div>
                 <div>
                     <h3 style="margin-bottom: 25px; font-size: 1.5rem;"><i class="fa-solid fa-cubes" style="color:var(--primary-color); margin-right: 10px;"></i> Toolset Proficiency</h3>
-                    <div id="software-container">
-                        <!-- Dynamic Progress Bars Go Here -->
-                    </div>
+                    <div id="software-container"></div>
                 </div>
             </div>
         </div>
@@ -662,24 +684,18 @@
             <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px;">
                 <div>
                     <h3 style="margin-bottom: 30px; font-size: 1.5rem;"><i class="fa-solid fa-briefcase" style="color:var(--primary-color); margin-right:10px;"></i> Work Experience</h3>
-                    <div class="timeline" id="experience-timeline">
-                        <!-- Dynamic Experience Timeline Go Here -->
-                    </div>
+                    <div class="timeline" id="experience-timeline"></div>
                 </div>
                 <div>
                     <h3 style="margin-bottom: 30px; font-size: 1.5rem;"><i class="fa-solid fa-graduation-cap" style="color:var(--primary-color); margin-right:10px;"></i> Education</h3>
-                    <div class="timeline" id="education-timeline">
-                        <!-- Dynamic Education Timeline Go Here -->
-                    </div>
+                    <div class="timeline" id="education-timeline"></div>
                 </div>
             </div>
             
             <!-- Company Slider -->
             <div id="company-logos-section" class="carousel-container" style="display:none;">
                 <div class="carousel-title">Recognized & Trusted By</div>
-                <div class="logo-slider" id="carousel-slider">
-                    <!-- Dynamic Sliding Tracks Rendered Here -->
-                </div>
+                <div class="logo-slider" id="carousel-slider"></div>
             </div>
         </div>
     </section>
@@ -688,9 +704,7 @@
     <section id="portfolio">
         <div class="container">
             <h2 class="section-title">Portfolio & Projects</h2>
-            <div class="portfolio-grid" id="portfolio-container">
-                <!-- Dynamic Portfolio Cards Go Here -->
-            </div>
+            <div class="portfolio-grid" id="portfolio-container"></div>
         </div>
     </section>
 
@@ -707,27 +721,27 @@
                             <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
                             <div class="contact-text">
                                 <h4>Phone</h4>
-                                <p id="contact-phone">+91 90449 94002</p>
+                                <p id="contact-phone"></p>
                             </div>
                         </div>
                         <div class="contact-item" id="contact-email-block">
                             <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
                             <div class="contact-text">
                                 <h4>Email</h4>
-                                <p id="contact-email">coolsnhilbajaj@gmail.com</p>
+                                <p id="contact-email"></p>
                             </div>
                         </div>
                         <div class="contact-item" id="contact-address-block">
                             <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
                             <div class="contact-text">
                                 <h4>Location</h4>
-                                <p id="contact-address">Kanpur, Uttar Pradesh, India</p>
+                                <p id="contact-address"></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form card">
-                    <form onsubmit="event.preventDefault(); alert('Submission Simulation! Dynamic email messaging works through static hosting forms like Formspree, Formkeep, or mailto links.');">
+                    <form onsubmit="event.preventDefault(); alert('Message simulation sent successfully.');">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Your Name" required>
                         </div>
@@ -747,17 +761,14 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; <span id="footer-year">2026</span> <span id="footer-name">Snehil Bajaj</span>. Built dynamically with dynamic plain text parsing engine.</p>
+            <p>&copy; <span id="footer-year"></span> <span id="footer-name">Snehil Bajaj</span>. Dynamic Parsing Engine.</p>
         </div>
     </footer>
 
-    <!-- Script Engine -->
     <script>
-        // Update Footer Year
         document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-        // 1. DEFAULT PROFILE FALLBACK DATA (Snehil Bajaj)
-        // This parses directly if fetch is blocked locally via file:// protocols
+        // Safe Placeholder Local Fallback Data
         const DEFAULT_SOURCE = `
 [NAME]: Snehil Bajaj
 [TITLE]: 2D/3D Animator & Visual Designer
@@ -768,13 +779,13 @@
 [AVATAR]: https://via.placeholder.com/320/1b263b/ffffff?text=Snehil+Bajaj
 
 [SECTION: ABOUT]
-Creative 3D Animator and Visual Designer with experience across 3D modelling, lighting, animation, and graphic design for advertising, film, and product branding. Skilled in leading design and editing for marketing campaigns, building visual content from concept to final render, and mentoring upcoming artists. Known for a strong eye for detail, reliable delivery on freelance and academic projects, and a versatile, multi-disciplinary skill set spanning 3D, photo, and video.
+Creative 3D Animator and Visual Designer with experience across 3D modelling, lighting, animation, and graphic design for advertising, film, and product branding. Skilled in leading design and editing for marketing campaigns, building visual content from concept to final render, and mentoring upcoming artists. Known for a strong eye for detail, reliable delivery on freelance and academic projects, and a versatile, multi-disciplinary skill set spanning 3D, photo, and video [1].
 [END_SECTION]
 
 [SECTION: CONTACT]
 [EMAIL]: coolsnhilbajaj@gmail.com
 [PHONE]: +91 90449 94002
-[ADDRESS]: 30/51 Chawal Mandi, Chawk, Kanpur – 208001, Uttar Pradesh
+[ADDRESS]: Kanpur, Uttar Pradesh, India
 [END_SECTION]
 
 [SECTION: SKILLS]
@@ -783,90 +794,19 @@ Lighting & Rendering
 3D Animation & FX
 Photo Retouching & Compositing
 Video Editing & Motion Graphics
-Camera Handling & 3-Point Lighting
 [END_SECTION]
 
 [SECTION: SOFTWARE]
 Adobe Photoshop | 95
-Adobe Illustrator | 85
-Adobe InDesign | 80
 Adobe Premiere Pro | 90
-Adobe After Effects | 88
 Autodesk Maya | 85
-Autodesk 3ds Max | 80
-CorelDRAW | 75
-[END_SECTION]
-
-[SECTION: EXPERIENCE]
-[JOB]
-[ROLE]: Senior Teacher — 3D Art & Animation
-[COMPANY]: Polyframe Academy of Arts and Cinematics
-[DURATION]: 2020 – Present
-[DESCRIPTION]: Teach 3D modelling, lighting, texturing, and animation workflows to students pursuing careers in design and animation. Mentor learners through portfolio-building projects, translating classroom technique into industry-ready work.
-[/JOB]
-[JOB]
-[ROLE]: Junior Editor & Animator (Internship)
-[COMPANY]: Exam Taiyaari
-[DURATION]: 2019 (3 months)
-[DESCRIPTION]: Supported video editing and motion graphics for educational content under senior creative direction. Assisted in animation production for online learning material.
-[/JOB]
-[JOB]
-[ROLE]: Freelance Senior Designer & Editor
-[COMPANY]: Mado & Meta Marketing
-[DURATION]: 2019 – Present
-[DESCRIPTION]: Led visual design and video editing for client campaigns. Produced branded design assets and edited promotional video content. Developed marketing visuals and creative edits across campaigns.
-[/JOB]
-[END_SECTION]
-
-[SECTION: EDUCATION]
-[DEGREE]: BFA — Applied Arts, Second Year
-[INSTITUTION]: Chhatrapati Shahu Ji Maharaj University (CSJMU)
-[YEAR]: 2019
-[GRADE]: 74.5%
-[/DEGREE]
-[DEGREE]: BFA — Applied Arts, First Year
-[INSTITUTION]: Chhatrapati Shahu Ji Maharaj University (CSJMU)
-[YEAR]: 2018
-[GRADE]: 74.5%
-[/DEGREE]
-[DEGREE]: Class 12 — Commerce
-[INSTITUTION]: Eshwaranand Siksha Niketan, Kanpur (UP Board)
-[YEAR]: 2017
-[GRADE]: 60%
-[/DEGREE]
-[END_SECTION]
-
-[SECTION: PORTFOLIO]
-[ITEM]
-[TITLE]: 3D Character Project
-[MEDIA]: https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800
-[DESCRIPTION]: Creative design explorations incorporating volumetric lighting and subsurface scattering.
-[/ITEM]
-[ITEM]
-[TITLE]: Kinetic Motion Graphics
-[MEDIA]: https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-spheres-and-lines-31956-large.mp4
-[DESCRIPTION]: Explanatory promotional kinetic artwork incorporating dynamic motion design and typographic edits.
-[/ITEM]
-[ITEM]
-[TITLE]: Abstract Branding Asset
-[MEDIA]: https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800
-[DESCRIPTION]: Creative visualization layout built for client packaging designs.
-[/ITEM]
-[END_SECTION]
-
-[SECTION: LOGOS]
-https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg
-https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg
-https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg
-https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg
 [END_SECTION]
 `;
 
-        // 2. TEXT PARSER ENGINE
+        // TEXT PARSER
         function parseSourceText(text) {
             const config = {};
             const sections = {};
-            
             const lines = text.split(/\r?\n/);
             let currentSection = null;
             let sectionContent = [];
@@ -875,7 +815,6 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
                 const line = lines[i].trim();
                 if (!line) continue;
 
-                // Capture sections
                 const sectionStartMatch = line.match(/^\[SECTION:\s*([A-Z_]+)\]/i);
                 if (sectionStartMatch) {
                     currentSection = sectionStartMatch[1].toUpperCase();
@@ -894,7 +833,6 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
                 if (currentSection) {
                     sectionContent.push(line);
                 } else {
-                    // Global configuration keys [KEY]: value
                     const configMatch = line.match(/^\[([A-Z0-9_]+)\]:\s*(.*)$/);
                     if (configMatch) {
                         config[configMatch[1].toUpperCase()] = configMatch[2].trim();
@@ -904,7 +842,7 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
             return { config, sections };
         }
 
-        // 3. GENERATE THE INTERFACE DYNAMICALLY
+        // GENERATE INTERFACE
         function buildInterface(data) {
             const { config, sections } = data;
 
@@ -912,9 +850,8 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
             if (config.PRIMARY_COLOR) document.documentElement.style.setProperty('--primary-color', config.PRIMARY_COLOR);
             if (config.SECONDARY_COLOR) document.documentElement.style.setProperty('--secondary-color', config.SECONDARY_COLOR);
             
-            // Layout Theme Choice
             const theme = (config.THEME || 'modern').toLowerCase();
-            document.body.className = ''; // reset
+            document.body.className = '';
             if (theme === 'dark') {
                 document.body.classList.add('theme-dark');
             } else if (theme === 'minimal') {
@@ -923,7 +860,7 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
                 document.body.classList.add('theme-modern');
             }
 
-            // Bind Basic Config Profile Elements
+            // Bind Info
             if (config.NAME) {
                 document.getElementById('hero-name').textContent = config.NAME;
                 document.getElementById('nav-logo-name').textContent = config.NAME;
@@ -933,12 +870,12 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
             if (config.TAGLINE) document.getElementById('hero-tagline').textContent = config.TAGLINE;
             if (config.AVATAR) document.getElementById('hero-avatar').src = config.AVATAR;
 
-            // Render About Me Block
+            // About Me
             if (sections.ABOUT) {
                 document.getElementById('about-text').innerHTML = sections.ABOUT.join('<br><br>');
             }
 
-            // Render Contact Block
+            // Contact details
             let contactDetails = {};
             if (sections.CONTACT) {
                 sections.CONTACT.forEach(line => {
@@ -946,28 +883,16 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
                     if (match) contactDetails[match[1]] = match[2];
                 });
             }
-            if (contactDetails.EMAIL) {
-                document.getElementById('contact-email').textContent = contactDetails.EMAIL;
-            } else {
-                document.getElementById('contact-email-block').style.display = 'none';
-            }
-            if (contactDetails.PHONE) {
-                document.getElementById('contact-phone').textContent = contactDetails.PHONE;
-            } else {
-                document.getElementById('contact-phone-block').style.display = 'none';
-            }
-            if (contactDetails.ADDRESS) {
-                document.getElementById('contact-address').textContent = contactDetails.ADDRESS;
-            } else {
-                document.getElementById('contact-address-block').style.display = 'none';
-            }
+            document.getElementById('contact-email').textContent = contactDetails.EMAIL || 'N/A';
+            document.getElementById('contact-phone').textContent = contactDetails.PHONE || 'N/A';
+            document.getElementById('contact-address').textContent = contactDetails.ADDRESS || 'N/A';
 
-            // Render Professional Skills
+            // Skills
             const skillsContainer = document.getElementById('skills-container');
             skillsContainer.innerHTML = '';
             if (sections.SKILLS) {
                 sections.SKILLS.forEach(skill => {
-                    const cleanSkill = skill.replace(/^[-\*\s\•]+/, '').trim(); // clean bullet decorators
+                    const cleanSkill = skill.replace(/^[-\*\s\•]+/, '').trim();
                     if (cleanSkill) {
                         const div = document.createElement('div');
                         div.className = 'skill-tag';
@@ -977,7 +902,7 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
                 });
             }
 
-            // Render Software Tool Proficiency Bars
+            // Software Tool Proficiency
             const softwareContainer = document.getElementById('software-container');
             softwareContainer.innerHTML = '';
             if (sections.SOFTWARE) {
@@ -1002,210 +927,169 @@ https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.
                 });
             }
 
-            // Render Experience Timeline
+            // Experience Timeline
             const expTimeline = document.getElementById('experience-timeline');
             expTimeline.innerHTML = '';
             if (sections.EXPERIENCE) {
                 let experiences = [];
                 let currentJob = null;
-                
                 sections.EXPERIENCE.forEach(line => {
-                    if (line.startsWith('[JOB]')) {
-                        currentJob = {};
-                    } else if (line.startsWith('[/JOB]')) {
-                        if (currentJob) experiences.push(currentJob);
-                        currentJob = null;
-                    } else if (currentJob) {
+                    if (line.startsWith('[JOB]')) currentJob = {};
+                    else if (line.startsWith('[/JOB]')) { if (currentJob) experiences.push(currentJob); currentJob = null; }
+                    else if (currentJob) {
                         const match = line.match(/^\[([A-Z0-9_]+)\]:\s*(.*)$/);
                         if (match) currentJob[match[1].toLowerCase()] = match[2];
                     }
                 });
-
                 experiences.forEach(job => {
-                    const markup = `
+                    expTimeline.insertAdjacentHTML('beforeend', `
                         <div class="timeline-item card">
                             <div class="timeline-date">${job.duration || ''}</div>
                             <h4 class="timeline-title">${job.role || ''}</h4>
                             <div class="timeline-subtitle">${job.company || ''}</div>
                             <p class="timeline-desc">${job.description || ''}</p>
                         </div>
-                    `;
-                    expTimeline.insertAdjacentHTML('beforeend', markup);
+                    `);
                 });
             }
 
-            // Render Education Timeline
+            // Education Timeline
             const eduTimeline = document.getElementById('education-timeline');
             eduTimeline.innerHTML = '';
             if (sections.EDUCATION) {
                 let edus = [];
                 let currentEdu = null;
-
                 sections.EDUCATION.forEach(line => {
-                    if (line.startsWith('[DEGREE]')) {
-                        currentEdu = {};
-                    } else if (line.startsWith('[/DEGREE]')) {
-                        if (currentEdu) edus.push(currentEdu);
-                        currentEdu = null;
-                    } else if (currentEdu) {
+                    if (line.startsWith('[DEGREE]')) currentEdu = {};
+                    else if (line.startsWith('[/DEGREE]')) { if (currentEdu) edus.push(currentEdu); currentEdu = null; }
+                    else if (currentEdu) {
                         const match = line.match(/^\[([A-Z0-9_]+)\]:\s*(.*)$/);
                         if (match) currentEdu[match[1].toLowerCase()] = match[2];
                     }
                 });
-
                 edus.forEach(edu => {
                     const gradeStr = edu.grade ? ` &bull; Grade: ${edu.grade}` : '';
-                    const markup = `
+                    eduTimeline.insertAdjacentHTML('beforeend', `
                         <div class="timeline-item card">
                             <div class="timeline-date">${edu.year || ''}</div>
                             <h4 class="timeline-title">${edu.degree || ''}</h4>
                             <div class="timeline-subtitle">${edu.institution || ''}${gradeStr}</div>
                         </div>
-                    `;
-                    eduTimeline.insertAdjacentHTML('beforeend', markup);
+                    `);
                 });
             }
 
-            // Render Company Logos Carousel (Infinite Slide)
+            // Company Logos
             const logoSection = document.getElementById('company-logos-section');
             const carouselSlider = document.getElementById('carousel-slider');
             carouselSlider.innerHTML = '';
             if (sections.LOGOS && sections.LOGOS.length > 0) {
                 logoSection.style.display = 'block';
-                
-                // Create two tracks to establish an seamless, infinite wrap-around slide effect
-                const track1 = document.createElement('div');
-                track1.className = 'logo-slide-wrapper';
-                const track2 = document.createElement('div');
-                track2.className = 'logo-slide-wrapper';
-
+                const t1 = document.createElement('div'); t1.className = 'logo-slide-wrapper';
+                const t2 = document.createElement('div'); t2.className = 'logo-slide-wrapper';
                 sections.LOGOS.forEach(url => {
                     if (url.trim()) {
-                        const img1 = `<img src="${url.trim()}" alt="Client Brand logo">`;
-                        track1.insertAdjacentHTML('beforeend', img1);
-                        const img2 = `<img src="${url.trim()}" alt="Client Brand logo duplication">`;
-                        track2.insertAdjacentHTML('beforeend', img2);
+                        t1.insertAdjacentHTML('beforeend', `<img src="${url.trim()}" alt="Logo">`);
+                        t2.insertAdjacentHTML('beforeend', `<img src="${url.trim()}" alt="Logo">`);
                     }
                 });
-                
-                carouselSlider.appendChild(track1);
-                carouselSlider.appendChild(track2);
+                carouselSlider.appendChild(t1);
+                carouselSlider.appendChild(t2);
             } else {
                 logoSection.style.display = 'none';
             }
 
-            // Render Portfolio Cards (Handles both images and videos dynamically)
+            // Portfolio
             const portfolioContainer = document.getElementById('portfolio-container');
             portfolioContainer.innerHTML = '';
             if (sections.PORTFOLIO) {
                 let items = [];
                 let currentItem = null;
-
                 sections.PORTFOLIO.forEach(line => {
-                    if (line.startsWith('[ITEM]')) {
-                        currentItem = {};
-                    } else if (line.startsWith('[/ITEM]')) {
-                        if (currentItem) items.push(currentItem);
-                        currentItem = null;
-                    } else if (currentItem) {
+                    if (line.startsWith('[ITEM]')) currentItem = {};
+                    else if (line.startsWith('[/ITEM]')) { if (currentItem) items.push(currentItem); currentItem = null; }
+                    else if (currentItem) {
                         const match = line.match(/^\[([A-Z0-9_]+)\]:\s*(.*)$/);
                         if (match) currentItem[match[1].toLowerCase()] = match[2];
                     }
                 });
-
                 items.forEach(item => {
-                    const mediaMarkup = buildMediaTag(item.media, item.title);
-                    const markup = `
+                    const mediaTag = buildMediaTag(item.media, item.title);
+                    portfolioContainer.insertAdjacentHTML('beforeend', `
                         <div class="portfolio-item card">
-                            <div class="portfolio-media-container">
-                                ${mediaMarkup}
-                            </div>
+                            <div class="portfolio-media-container">${mediaTag}</div>
                             <div class="portfolio-info">
-                                <h3>${item.title || 'Untitled Project'}</h3>
+                                <h3>${item.title || 'Project'}</h3>
                                 <p>${item.description || ''}</p>
                             </div>
                         </div>
-                    `;
-                    portfolioContainer.insertAdjacentHTML('beforeend', markup);
+                    `);
                 });
             }
         }
 
-        // Helper to output correct element tags for portfolio assets
         function buildMediaTag(url, altText) {
-            if (!url) return `<img class="portfolio-media" src="https://via.placeholder.com/600x400?text=No+Asset+Found" alt="Placeholder">`;
-            
+            if (!url) return `<img class="portfolio-media" src="https://via.placeholder.com/600x400" alt="Placeholder">`;
             const cleanUrl = url.trim();
             const lowerUrl = cleanUrl.toLowerCase();
             
-            // Check for popular video platforms
             if (lowerUrl.includes('youtube.com/') || lowerUrl.includes('youtu.be/') || lowerUrl.includes('vimeo.com/')) {
                 let embedUrl = cleanUrl;
                 if (lowerUrl.includes('youtu.be/')) {
-                    const id = cleanUrl.split('/').pop().split('?')[0];
-                    embedUrl = `https://www.youtube.com/embed/${id}`;
-                } else if (lowerUrl.includes('youtube.com/watch')) {
-                    const urlParams = new URLSearchParams(new URL(cleanUrl).search);
-                    const id = urlParams.get('v');
-                    embedUrl = `https://www.youtube.com/embed/${id}`;
+                    embedUrl = `https://www.youtube.com/embed/${cleanUrl.split('/').pop().split('?')[0]}`;
+                } else if (lowerUrl.includes('watch')) {
+                    embedUrl = `https://www.youtube.com/embed/${new URLSearchParams(new URL(cleanUrl).search).get('v')}`;
                 }
-                return `<iframe class="portfolio-media" src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                return `<iframe class="portfolio-media" src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
             }
-            
-            // Check direct video paths
             if (lowerUrl.endsWith('.mp4') || lowerUrl.endsWith('.webm') || lowerUrl.endsWith('.ogg')) {
-                return `<video class="portfolio-media" src="${cleanUrl}" controls muted loop playsinline></video>`;
+                return `<video class="portfolio-media" src="${cleanUrl}" controls muted loop></video>`;
             }
-            
-            // Default: Image paths
-            return `<img class="portfolio-media" src="${cleanUrl}" alt="${altText || 'Project Image'}" onerror="this.src='https://via.placeholder.com/600x400?text=Asset+Not+Found'">`;
+            return `<img class="portfolio-media" src="${cleanUrl}" alt="${altText || 'Image'}" onerror="this.src='https://via.placeholder.com/600x400?text=Asset+Not+Found'">`;
         }
 
-        // 4. FETCH AND INITIALIZE CONTROLLER
+        // INITIALIZER WITH CORS FALLBACK CONTROLS
         async function initPortfolio() {
+            const isLocal = window.location.protocol === 'file:';
+            if (isLocal) {
+                // Show local bypass widget if opened on hard-drive directly
+                document.getElementById('local-mode-bar').style.display = 'block';
+            }
+
             try {
-                const response = await fetch('source.txt');
-                if (!response.ok) {
-                    throw new Error('Local load error (Could be CORS or file structure error).');
-                }
-                const textData = await response.text();
-                const parsedData = parseSourceText(textData);
-                buildInterface(parsedData);
+                // Force fresh fetch with a cache buster parameter to avoid showing stale cached txt content
+                const response = await fetch('source.txt?t=' + Date.now());
+                if (!response.ok) throw new Error('Could not fetch source.txt');
+                const text = await response.text();
+                buildInterface(parseSourceText(text));
             } catch (error) {
-                console.warn("Source dynamic fetch failed. Using default localized fallback content safely. Error details:", error);
-                
-                // Show localized developer warning banner if running locally over file:// protocol
-                if (window.location.protocol === 'file:') {
+                console.warn("Unable to fetch source.txt. Displaying local fallback values.", error);
+                if (!isLocal) {
                     document.getElementById('cors-banner').style.display = 'block';
                 }
-                
-                const fallbackParsed = parseSourceText(DEFAULT_SOURCE);
-                buildInterface(fallbackParsed);
+                buildInterface(parseSourceText(DEFAULT_SOURCE));
             }
         }
 
-        // Navigation Menu Highlighting logic on Scroll
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            const navLi = document.querySelectorAll('.nav-link');
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 120) {
-                    current = section.getAttribute('id');
-                }
-            });
+        // Action listener to handle local offline uploads
+        document.getElementById('local-file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
 
-            navLi.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').slice(1) === current) {
-                    a.classList.add('active');
-                }
-            });
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                buildInterface(parseSourceText(evt.target.result));
+                
+                // Show notification toast
+                const toast = document.createElement('div');
+                toast.style.cssText = "position: fixed; bottom: 20px; right: 20px; background: #319795; color: white; padding: 12px 24px; border-radius: 8px; z-index: 10000; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.15);";
+                toast.textContent = "Applied local edits from " + file.name;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 4000);
+            };
+            reader.readAsText(file);
         });
 
-        // Initialize Application
         window.addEventListener('DOMContentLoaded', initPortfolio);
     </script>
 </body>
